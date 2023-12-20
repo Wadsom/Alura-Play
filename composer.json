@@ -1,0 +1,18 @@
+{
+    "name": "wadi/project-alura",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "src\\": "src/",
+            "global\\": "Project-Alura/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Wadson",
+            "email": "pinheirowadson@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
