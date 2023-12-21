@@ -20,11 +20,11 @@ class Connect
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
     ];
 
-    public function getInstance(): PDO
+    public  function getInstance(): PDO
     {
         if (empty(self::$instance)) {
             self::$instance = new PDO(
-                "mysql:host=" . self::HOST . "; dbname=" . self::DBNAME,
+                "mysql:host=" . self::HOST . ";dbname=" . self::DBNAME,
                 self::USER, self::PASSWD, self::OPTIONS
             );
         }
