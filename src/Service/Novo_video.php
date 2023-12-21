@@ -1,13 +1,18 @@
 <?php
 require __DIR__ . "/../../vendor/autoload.php";
 
-use src\Database\Connect as DbConnect;
-echo "olá";
-$pdo = new DbConnect();
-$url = $_POST['url'];
-$title = $_POST['title'];
-$statement = $pdo->getInstance()->prepare("INSERT INTO novo_video(url,title) VALUES (url = :url , title = :title)");
-$statement ->bindValue(':url', $url);
-$statement->bindValue(':title', $title);
-$statement->execute();
-var_dump($statement->execute());
+$pdo = (new src\Database\Connect)->getInstance();
+$createTable = "CREATE TABLE tb_novo_video(id int PRIMARY KEY UNIQUE, url TEXT ,title TEXT)";
+$sql = 'INSERT INTO tb_novo_video(url,title) VALUES (:url , :title)';
+$statement = $pdo->prepare($sql);
+$statement->bindValue(':url', $_POST['url']);
+$statement->bindValue(':title', $_POST['title']);
+var_dump($statement);
+if ($statement->execute() === false) {
+    header(
+        'Location: ./index.php?sucesso=0'
+    );
+} else {
+    header('Location: ./index.php?sucesso=1'
+    );
+}
