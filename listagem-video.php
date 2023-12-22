@@ -1,8 +1,8 @@
 <?php
 require __DIR__ . '/src/Database/Connect.php';
 $pdo = new \src\Database\Connect();
-$query = "SELECT * FROM tb_novo_video;";
-$videoList = $pdo->getInstance()->query($query)->fetchAll(\PDO::FETCH_ASSOC);
+$repo = new \src\Repository\VideoRpository($pdo->getInstance());
+$videoList = $repo->getAll();
 ?>
 
 
@@ -38,22 +38,21 @@ $videoList = $pdo->getInstance()->query($query)->fetchAll(\PDO::FETCH_ASSOC);
 
 <ul class="videos__container" alt="videos alura">
     <?php foreach ($videoList as $video) : ?>
-        <?php if (str_starts_with(($video['url']), 'http')) : ?>
-            <li class="videos__item">
-                <iframe width="100%" height="72%" src="<?php echo $video['url']; ?>"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                <div class="descricao-video">
-                    <img src="./img/logo.png" alt="logo canal alura">
-                    <h3><?php echo $video['title'] ?></h3>
-                    <div class="acoes-video">
-                        <a href="/editar-video?id=<?= $video['id']; ?>">Editar</a>
-                        <a href="/remover-video?id=<?= $video['id']; ?>">Excluir</a>
-                    </div>
+        <li class="videos__item">
+            <iframe width="100%" height="72%" src="<?= $video->url ?>"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            <div class="descricao-video">
+                <img src="./img/logo.png" alt="logo canal alura">
+                <h3><?php echo $video->title ?></h3>
+                <div class="acoes-video">
+                    <a href="/editar-video?id=<?= $video->id ?>">Editar</a>
+                    <a href="/remover-video?id=<?= $video->id; ?>">Excluir</a>
                 </div>
-            </li>
-        <?php endif; ?>
+            </div>
+        </li>
+
     <?php endforeach ?>
 </ul>
 </body>
