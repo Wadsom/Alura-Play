@@ -8,9 +8,9 @@ $state->bindValue(':id', $id);
 $state->execute();
 if ($state->execute() === false) {
     header(
-        'Location: ./index.php?sucesso=0'
+        'Location: ./listagem-video.php?sucesso=0'
     );
 } else {
-    header('Location: ./index.php?sucesso=1'
+    header('Location: ./listagem-video.php?sucesso=1'
     );
 }

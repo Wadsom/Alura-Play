@@ -10,9 +10,9 @@ $statement->bindValue(':title', $_POST['title']);
 var_dump($statement);
 if ($statement->execute() === false) {
     header(
-        'Location: ./index.php?sucesso=0'
+        'Location: ./listagem-video.php?sucesso=0'
     );
 } else {
-    header('Location: ./index.php?sucesso=1'
+    header('Location: ./listagem-video.php?sucesso=1'
     );
 }

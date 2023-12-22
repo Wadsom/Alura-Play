@@ -1,9 +1,8 @@
 <?php
-require __DIR__ .'/src/Database/Connect.php';
+require __DIR__ . '/src/Database/Connect.php';
 $pdo = new \src\Database\Connect();
 $query = "SELECT * FROM tb_novo_video;";
 $videoList = $pdo->getInstance()->query($query)->fetchAll(\PDO::FETCH_ASSOC);
-
 ?>
 
 
@@ -27,10 +26,10 @@ $videoList = $pdo->getInstance()->query($query)->fetchAll(\PDO::FETCH_ASSOC);
 <header>
 
     <nav class="cabecalho">
-        <a class="logo" href="index.php"></a>
+        <a class="logo" href="/Lista"></a>
 
         <div class="cabecalho__icones">
-            <a href="./pages/enviar-video.html" class="cabecalho__videos"></a>
+            <a href="/novo-video" class="cabecalho__videos"></a>
             <a href="./pages/login.html" class="cabecalho__sair">Sair</a>
         </div>
     </nav>
@@ -41,21 +40,21 @@ $videoList = $pdo->getInstance()->query($query)->fetchAll(\PDO::FETCH_ASSOC);
     <?php foreach ($videoList as $video) : ?>
         <?php if (str_starts_with(($video['url']), 'http')) : ?>
             <li class="videos__item">
-                <iframe width="100%" height="72%" src="<?php echo $video['url'] ?>"
+                <iframe width="100%" height="72%" src="<?php echo $video['url']; ?>"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
                 <div class="descricao-video">
                     <img src="./img/logo.png" alt="logo canal alura">
-                    <h3><?php  echo $video['title'] ?></h3>
+                    <h3><?php echo $video['title'] ?></h3>
                     <div class="acoes-video">
-                        <a href="./pages/enviar-video.html">Editar</a>
-                        <a href="removendo-video.php?id=<?= $video['id'] ;?>">Excluir</a>
+                        <a href="/editar-video?id=<?= $video['id']; ?>">Editar</a>
+                        <a href="/remover-video?id=<?= $video['id']; ?>">Excluir</a>
                     </div>
                 </div>
             </li>
         <?php endif; ?>
-    <?php endForeach ?>
+    <?php endforeach ?>
 </ul>
 </body>
 
